@@ -33,9 +33,10 @@ os.execute("rm -fr installer.lua")
 print("Готово")
 
 
+-- Запуск ИИ сразу
 print("Запустить ИИ сейчас? [Y/n]")
 local run = io.read()
 
 if(run ~= "n") then
-    os.execute("main.lua")
+    os.execute("main.lua")  -- Запуск файла main.lua
 end

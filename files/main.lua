@@ -13,6 +13,8 @@ local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
 
 
+term.clear()  -- Очистка терминала
+
 
 local ai_vers, ai_name, auth_users, admins = data.Get()  -- Получение данных из библиотеки даты
 
@@ -38,11 +40,11 @@ function ReadChat()
 end
 -- Конец функций
 
-
+local Cycle = true
 
 
 -- Постоянный код
-while true do
+while Cycle do
   local nick, msg = ReadChat()
   cmd.Commands(nick, msg, ai_name, admins)
 end
