@@ -1,18 +1,33 @@
--- Основные файлы
-os.execute("wget -f https://pastebin.com/raw/R1JycGkn /home/main.lua") -- Исполняющий файл
-os.execute("wget -f https://pastebin.com/raw/7mEPaWza /home/config.txt")   -- Конфиг
+local shell = require("shell")
+local fs = require("filesystem")
 
-os.execute("wget -f https://pastebin.com/raw/SuN5mz1t /home/uninstall.lua")   -- Файл удаления
+-- Массив с программами, которые необходимо загрузить.
+-- Первый элемент - название файла, второй - ссылка на файл, третий - директория для сохранения файла.
+local applications = {
+  -- Основные файлы
+  { "main.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/main.lua", "/home/" },  -- Исполняющий файл
+  { "config.txt", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/config.txt", "/home/" },  -- Конфиг файл
+  { "uninstall.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/uninstall.lua", "/home/" },  -- Файл удаления
+  -- Основые библиотеки
+  { "data.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/data.lua", "/home/lib/" },  -- Библиотека данных
+  { "cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cmd.lua", "/home/lib/" },  -- Библиотека данных
+  { "access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua", "/home/lib/" },  -- Библиотека данных
+}
 
-
+-- Создаём папки
 os.execute("mkdir lib") -- Создание папки Библиотека
 
+-- Загружаем файлы
+for i = 1, #applications do
+  print("Устанавливаю " .. applications[i][1])
+  fs.makeDirectory(fs.path(applications[i][3] .. applications[i][1]) or "")		
+  shell.execute("wget " .. applications[i][2] .. " " .. applications[i][3] .. applications[i][1] .. " -fQ")
+  os.sleep(0.3)
+end
 
--- Установка библиотек
-os.execute("wget -f https://pastebin.com/raw/Yj3pVC8v /home/lib/data.lua") -- Библиотека Данных
-os.execute("wget -f https://pastebin.com/raw/vuLay2rP /home/lib/cmd.lua")  -- Библиотека Команд
-os.execute("wget -f https://pastebin.com/raw/HQfxrwXF /home/lib/access.lua")   -- Библиотека Административных прав
 
 
 -- Удаление файла установки
 os.execute("rm -fr installer.lua")
+
+print("Готово")
