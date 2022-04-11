@@ -11,7 +11,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
       -- Команды связанные с правами администратора
       if(string.find(msg, "права администратора") ~= nil) then
         if(string.find(msg, "выдать") ~= nil or string.find(msg, "выдай") ~= nil) then
-          local admins = access.Get(nick, msg, ai_vers, ai_name, auth_users, admins)
+          local admins = access.Get(nick, msg, admins)
         end
       end
 
