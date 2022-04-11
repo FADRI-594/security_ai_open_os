@@ -100,22 +100,28 @@ function data.Set(arg, cmd)
     local file, err = io.open("config.txt", "w") -- Открываем файл
     if file then
 
+
         for i = 1, #newLines do
             file:write(newLines[i][1] .. ": ")
-            if(type(newLines[i][2]) ~= "table") then
+            if(type(newLines[i][2]) ~= "table") then    -- Если второе значение не таблица
                 file:write(newLines[i][2])
-            else
-                if newLines[i][2][0] ~= "пусто" then
-                    local line = ""
-                    for k, s in pairs(newLines[i][2]) do
-                        line = line .. s .. ", "
-                    end
-                    local nLine = string.sub(line, 1, #line-2)
-                    file:write(nLine)
+            else    -- Если второе значение таблица
+
+
+                local line = "" 
+
+                for l = 1, #newLines[i][2] do
+                    line = line .. newLines[i][2][l] .. ", "
                 end
+
+                local nl = string.sub(line, 1, #line-2)
+                file:write(nl)
+
+                
             end
             file:write(";\n")
         end
+
 
     else
         print("Error opening file: " .. err)
@@ -134,36 +140,43 @@ function data.Update(arg, cmd1, cmd2)
     local newArg
     local command
 
-    if(cmd1 == "admins") then
-        if(cmd2 == "add") then
-            if(#admins == 1 and admins[#admins-1] == "пусто") then
-                admins[#admins-1] = arg
-            else
+
+    if(cmd1 == "admins") then   -- Если изменения администраторов
+        if(cmd2 == "add") then  -- Если добавление администратора
+
+            if(#admins == 1 and admins[#admins] == "пусто") then  -- Если всего 1 запись и она пуста
                 admins[#admins] = arg
+            else
+                admins[#admins+1] = arg
             end
-        elseif(cmd2 == "delete") then
-            for k, s in pairs(admins) do
-                if(s == arg) then
-                    if(k == #admins) then
-                        admins[k-1] = nil
+
+        elseif(cmd2 == "delete") then   -- Если удаление администратора
+
+            for i = 1, #admins do
+                if(admins[i] == arg) then   -- Если админ = нику
+                    if(i == #admins) then   -- Если админ в самом конце
+                        if(#admins > 1) then
+                            admins[i] = nil
+                        else
+                           admins[i] = "пусто" 
+                        end
                     else
-                        for n, w in pairs(admins) do
-                            if(n > k) then
-                                admins[n-2] = w
-                                admins[n-1] = nil
+                        for l = 1, #admins do
+                            if(l >= i) then
+                                admins[l] = admins[l+1]
                             end
                         end
                     end
-
-                    break
-                end
+                end 
             end
 
-            newArg = admins
-            command = "admins"
         end
+
+        newArg = admins
+        command = "admins"
     end
 
+    
     data.Set(newArg, command)
 
     return newArg
