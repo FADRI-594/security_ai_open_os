@@ -24,7 +24,7 @@ os.execute("mkdir lib") -- Создание папки Библиотека
 for i = 1, #applications do
   print("Устанавливается: " .. applications[i][2] .. applications[i][1])
   fs.makeDirectory(fs.path(applications[i][2] .. applications[i][1]) or "")		
-  shell.execute("wget " .. applications[i][3] .. " " .. applications[i][3] .. applications[i][1] .. " -fQ")
+  shell.execute("wget " .. applications[i][3] .. " " .. applications[i][2] .. applications[i][1] .. " -fQ")
   os.sleep(0.3)
 end
 
