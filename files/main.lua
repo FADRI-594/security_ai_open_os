@@ -1,5 +1,4 @@
 local component = require("component")
-local sides = require("sides")
 local term = require("term")
 local event = require("event")
 local unicode = require("unicode")
@@ -13,7 +12,7 @@ local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
 
 
-term.clear()  -- Очистка терминала
+term.clear()  -- Очистка экрана
 
 
 local ai_vers, ai_name, auth_users, admins = data.Get()  -- Получение данных из библиотеки даты
@@ -22,12 +21,13 @@ local ai_vers, ai_name, auth_users, admins = data.Get()  -- Получение �
 component.chat_box.setName(ai_name[0])  -- Установить имя для ИИ на чатбокс
 
 
+--[[
 component.chat_box.say("Идёт загрузка системы.")
 os.sleep(10)
 component.chat_box.say("Загрузка успешно завершена.")
 os.sleep(1)
 component.chat_box.say("Приветствую!")
-
+]]--
 
 
 
@@ -40,8 +40,8 @@ function ReadChat()
 end
 -- Конец функций
 
+
 local Cycle = true
-local upd = false
 
 -- Постоянный код
 while Cycle do
