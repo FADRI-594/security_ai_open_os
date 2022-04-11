@@ -73,7 +73,23 @@ end
 
 
 -- Записать данные
-function data.Set(ai_vers, ai_name, auth_users, admins)
+function data.Set(arg, cmd)
+    local ai_vers, ai_name, auth_users, admins = data.Get()
+
+
+    -- Проверка что перезаписать
+    if(cmd == ai_vers) then
+        ai_vers = arg
+    elseif(cmd == ai_name) then
+        ai_name = arg
+    elseif(cmd == auth_users) then
+        auth_users = arg
+    elseif(cmd == admins) then
+        admins = arg
+    end
+
+
+
     local newLines = {
         {"Версия ИИ", ai_vers},
         {"Имя ИИ", ai_name},
@@ -105,12 +121,18 @@ function data.Set(ai_vers, ai_name, auth_users, admins)
         print("Error opening file: " .. err)
     end
     file:close()  -- Закрываем файл
+
+
+    return
 end
 
 
 -- Обновить данные
 function data.Update(arg, cmd1, cmd2)
     local ai_vers, ai_name, auth_users, admins = data.Get()
+
+    local newArg
+    local command
 
     if(cmd1 == "admins") then
         if(cmd2 == "add") then
@@ -136,8 +158,17 @@ function data.Update(arg, cmd1, cmd2)
                     break
                 end
             end
+
+            newArg = admins
+            command = "admins"
         end
     end
 
-    data.Set(ai_vers, ai_name, auth_users, admins)
+    data.Set(newArg, command)
+
+    return newArg
 end
+
+
+
+return data

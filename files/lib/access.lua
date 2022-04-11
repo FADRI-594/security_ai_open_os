@@ -4,7 +4,7 @@ local component = require("component")
 local data = require("data")  -- Библиотека данных
 
 -- Получение прав администратора
-function access.Get(nick, msg, ai_name, admins)
+function access.Get(nick, msg, admins)
 
   local NewAdmins = ""  -- Список никнеймов админов
 
@@ -31,10 +31,10 @@ function access.Get(nick, msg, ai_name, admins)
     end
   else
     component.chat_box.say(nick .. ", вам присвоены права!")
-    data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
+    admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
   end
   
-  return ai_name, admins
+  return admins
 end
 
 
