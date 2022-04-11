@@ -1,5 +1,8 @@
+local term = require("term")
 local shell = require("shell")
 local fs = require("filesystem")
+
+term.clear()
 
 -- Массив с программами, которые необходимо загрузить.
 -- Первый элемент - название файла, второй - ссылка на файл, третий - директория для сохранения файла.
