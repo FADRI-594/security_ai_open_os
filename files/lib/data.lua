@@ -103,7 +103,8 @@ function data.Set(arg, cmd)
         for i = 1, #newLines do
             file:write(newLines[i][1] .. ": ")
             if(newLines[i][2] ~= auth_users or newLines[i][2] ~= admins) then
-                file:write(newLines[i][2])
+                local str = newLines[i][2]
+                file:write("" .. str)
             else
                 if newLines[i][2][0] ~= "пусто" then
                     local line = ""
