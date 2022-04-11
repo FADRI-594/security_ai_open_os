@@ -11,15 +11,15 @@ local applications = {
   -- Основые библиотеки
   { "data.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/data.lua", "/home/lib/" },  -- Библиотека данных
   { "cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cmd.lua", "/home/lib/" },  -- Библиотека данных
-  { "access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua", "/home/lib/" },  -- Библиотека данных
+  { "access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua", "/home/lib/" }  -- Библиотека данных
 }
 
--- Создаём папки
+-- Создание папок
 os.execute("mkdir lib") -- Создание папки Библиотека
 
--- Загружаем файлы
+-- Загрузка файлов
 for i = 1, #applications do
-  print("Устанавливаю " .. applications[i][1])
+  print("Устанавливается: " .. applications[i][1])
   fs.makeDirectory(fs.path(applications[i][3] .. applications[i][1]) or "")		
   shell.execute("wget " .. applications[i][2] .. " " .. applications[i][3] .. applications[i][1] .. " -fQ")
   os.sleep(0.3)
