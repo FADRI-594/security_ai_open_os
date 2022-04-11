@@ -78,13 +78,13 @@ function data.Set(arg, cmd)
 
 
     -- Проверка что перезаписать
-    if(cmd == ai_vers) then
+    if(cmd == "ai_vers") then
         ai_vers = arg
-    elseif(cmd == ai_name) then
+    elseif(cmd == "ai_name") then
         ai_name = arg
-    elseif(cmd == auth_users) then
+    elseif(cmd == "auth_users") then
         auth_users = arg
-    elseif(cmd == admins) then
+    elseif(cmd == "admins") then
         admins = arg
     end
 
