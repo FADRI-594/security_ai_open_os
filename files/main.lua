@@ -30,21 +30,21 @@ component.chat_box.say("Приветствую!")
 
 
 
+
 -- Функции
 -- Функция чтения чата
 function ReadChat()
   local _, add, nick, msg = event.pull("chat_message")
-  msg = string.lower(msg)
 
   return nick, msg
 end
 -- Конец функций
 
 local Cycle = true
-
+local upd = false
 
 -- Постоянный код
 while Cycle do
   local nick, msg = ReadChat()
-  cmd.Commands(nick, msg, ai_name, admins)
+  local ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
 end

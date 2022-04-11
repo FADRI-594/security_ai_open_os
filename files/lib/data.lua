@@ -1,5 +1,7 @@
 local data = {}
+local component = require("component")
 
+-- Получить данные
 function data.Get()
     local ai_vers
     local ai_name = {}
@@ -70,12 +72,72 @@ function data.Get()
 end
 
 
+-- Записать данные
+function data.Set(ai_vers, ai_name, auth_users, admins)
+    local newLines = {
+        {"Версия ИИ", ai_vers},
+        {"Имя ИИ", ai_name},
+        {"Авторизованные пользователи", auth_users},
+        {"Администраторы", admins}
+    }
 
-function data.Update()
-    local ai_vers, ai_name, auth_users, admins = data.Get()
-    return ai_vers, ai_name, auth_users, admins
+    local file, err = io.open("config.txt", "w") -- Открываем файл
+    if file then
+
+        for i = 1, #newLines do
+            file:write(newLines[i][1] .. ": ")
+            if(newLines[i][2] ~= nil) then
+                file:write(newLines[i][2])
+            else
+                if newLines[i][2][0] ~= "пусто" then
+                    local line = ""
+                    for k, s in pairs(newLines[i][2]) do
+                        line = line .. s .. ", "
+                    end
+                    local nLine = string.sub(line, 1, #line-2)
+                    file:write(nLine)
+                end
+            end
+            file:write(";\n")
+        end
+
+    else
+        print("Error opening file: " .. err)
+    end
+    file:close()  -- Закрываем файл
 end
 
 
+-- Обновить данные
+function data.Update(arg, cmd1, cmd2)
+    local ai_vers, ai_name, auth_users, admins = data.Get()
 
-return data
+    if(cmd1 == "admins") then
+        if(cmd2 == "add") then
+            if(#admins == 1 and admins[#admins-1] == "пусто") then
+                admins[#admins-1] = arg
+            else
+                admins[#admins] = arg
+            end
+        elseif(cmd2 == "delete") then
+            for k, s in pairs(admins) do
+                if(s == arg) then
+                    if(k == #admins) then
+                        admins[k-1] = nil
+                    else
+                        for n, w in pairs(admins) do
+                            if(n > k) then
+                                admins[n-2] = w
+                                admins[n-1] = nil
+                            end
+                        end
+                    end
+
+                    break
+                end
+            end
+        end
+    end
+
+    data.Set(ai_vers, ai_name, auth_users, admins)
+end

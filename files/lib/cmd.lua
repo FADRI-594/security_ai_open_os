@@ -3,7 +3,7 @@ local cmd = {}
 local access = require("access")  -- Библиотека прав администратора
 
 -- Команды
-function cmd.Commands(nick, msg, ai_name, admins)
+function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
   for k, s in pairs(ai_name) do
     if(string.find(msg, s) == 1) then
       
@@ -19,7 +19,7 @@ function cmd.Commands(nick, msg, ai_name, admins)
       break
     end
   end
-  return
+  return ai_vers, ai_name, auth_users, admins
 end
 
 

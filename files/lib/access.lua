@@ -1,6 +1,7 @@
-local component = require("component")
-
 local access = {}
+local component = require("component")
+-- Библиотеки
+local data = require("data")  -- Библиотека данных
 
 -- Получение прав администратора
 function access.Get(nick, msg, ai_name, admins)
@@ -30,10 +31,10 @@ function access.Get(nick, msg, ai_name, admins)
     end
   else
     component.chat_box.say(nick .. ", вам присвоены права!")
-    --data.RecordData(nick) -- Вызов функции записи в конфиг
+    data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
   end
   
-  return
+  return ai_name, admins
 end
 
 
