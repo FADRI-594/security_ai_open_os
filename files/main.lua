@@ -9,8 +9,8 @@ local gpu = component.gpu
 
 
 -- Библиотеки
-local data = require("/home/lib/data")  -- Библиотека данных
-local cmd = require("/home/lib/cmd")  -- Библиотека команд
+local data = require("data")  -- Библиотека данных
+local cmd = require("cmd")  -- Библиотека команд
 
 
 term.clear()  -- Очистка терминала
