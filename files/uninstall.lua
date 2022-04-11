@@ -19,7 +19,7 @@ local applications = {
 
 -- Удаление файлов
 for i = 1, #applications do
-    print("Удаляется: " .. applications[i][1])
+    print("Удаляется: " .. applications[i][2] .. applications[i][1])
     shell.execute("rm -fr " .. applications[i][2] .. applications[i][1])
     os.sleep(0.3)
 end
