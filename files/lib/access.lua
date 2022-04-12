@@ -34,7 +34,7 @@ end
 
 
 -- Получение прав администратора
-function access.Get(nick, msg, admins)
+function access.Get(nick, admins)
 
   local NewAdmins = access.NA_in_Line(admins)
   print("\nNewAdmins: " .. NewAdmins .. "\n")
