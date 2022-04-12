@@ -35,7 +35,10 @@ end
 
 -- Получение прав администратора
 function access.Get(nick, admins)
- 
+
+  local NewAdmins = access.NA_in_Line(admins)
+
+  
   if(NewAdmins == "пусто") then -- Если строка ников пуста
     say(nick .. ", вам присвоены права!")
     admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
