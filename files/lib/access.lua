@@ -25,7 +25,7 @@ function FindNick(nick, admins)
 
   end
 
-
+  print("st: " .. st)
 
   return st
 end
