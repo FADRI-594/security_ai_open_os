@@ -21,49 +21,49 @@ function data.Get()
     -- Значения из файла
     local t = {}  -- Массив всех нужных данных из файла
 
-    local i = 0
+    local i = 1
     for s in string.gmatch(config, "[^;]+") do
         local w = {}
-        local k = 0
+        local k = 1
         for v in string.gmatch(s, "[^:]+") do
             w[k] = v
             k = k+1
         end
 
-        if(w[1] == nil) then
-            w[1] = "пусто"
+        if(w[2] == nil) then
+            w[2] = "пусто"
         end
 
-        t[i] = w[1]
+        t[i] = w[2]
         i = i + 1
     end
 
     -- Разбиение строки имени ИИ
     t[1] = t[1] .. ",Компьютер,Комп"
     local nai = {}   -- Массив всех имён из ИИ из файла
-    local i = 0
-    for s in string.gmatch(t[1], "[^,]+") do
+    local i = 1
+    for s in string.gmatch(t[2], "[^,]+") do
         nai[i] = s
         i = i+1
     end
     -- Разбиение строки Авторизованных пользователей
     local au = {}   -- Массив всех авторизованных пользователей из файла
-    local i = 0
-    for s in string.gmatch(t[2], "[^,]+") do
+    local i = 1
+    for s in string.gmatch(t[3], "[^,]+") do
         au[i] = s
         i = i+1
     end
     -- Разбиение строки Администраторов
     local ad = {}   -- Массив всех администраторов из файла
-    local i = 0
-    for s in string.gmatch(t[3], "[^,]+") do
+    local i = 1
+    for s in string.gmatch(t[4], "[^,]+") do
         ad[i] = s
         i = i+1
     end
 
 
     -- Данные
-    ai_vers = t[0]
+    ai_vers = t[1]
     ai_name = nai
     auth_users = au
     admins = ad
