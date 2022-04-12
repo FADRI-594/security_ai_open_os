@@ -12,20 +12,23 @@ function access.FindNick(nick, admins)
 
   if(#admins == 1 and admins[1] == "пусто") then
     st = "пусто"
+    print("st: " .. st)
   else
 
     -- Поиск ника в admins
     for i = 1, #admins do
       st = "не найдено"
+      print("st: " .. st)
       if(admins[i] == nick) then  -- Если ник найден в admins
         st = "найдено"
+        print("st: " .. st)
         break -- Перестать искать
       end
     end
 
   end
 
-  print("st: " .. st)
+  
 
   return st
 end
