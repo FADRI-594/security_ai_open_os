@@ -37,6 +37,14 @@ end
 function access.Get(nick, msg, admins)
 
   local NewAdmins = access.NA_in_Line(admins)
+  print("\nNewAdmins: " .. NewAdmins .. "\n")
+
+
+  print("Admins:\n")
+  for i = 1, #admins do
+    print(admins[i])
+  end
+
 
 
   
