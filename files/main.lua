@@ -7,6 +7,8 @@ local fs = require("filesystem")
 local gpu = component.gpu
 
 
+local say = component.chat_box.say
+
 -- Библиотеки
 local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
@@ -22,11 +24,11 @@ component.chat_box.setName(ai_name[0])  -- Установить имя для И
 
 
 --[[
-component.chat_box.say("Идёт загрузка системы.")
+say("Идёт загрузка системы.")
 os.sleep(10)
-component.chat_box.say("Загрузка успешно завершена.")
+say("Загрузка успешно завершена.")
 os.sleep(1)
-component.chat_box.say("Приветствую!")
+say("Приветствую!")
 ]]--
 
 

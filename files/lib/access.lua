@@ -1,5 +1,6 @@
 local access = {}
 local component = require("component")
+local say = component.chat_box.say
 -- Библиотеки
 local data = require("data")  -- Библиотека данных
 
@@ -25,12 +26,12 @@ function access.Get(nick, msg, admins)
   
   if(NewAdmins ~= nil) then
     if(string.find(NewAdmins, nick) == nil) then
-      component.chat_box.say(nick .. ", у вас нет прав на использование этой команды!")
+      say(nick .. ", у вас нет прав на использование этой команды!")
     else
-      component.chat_box.say(nick .. ", у вас уже есть права!")
+      say(nick .. ", у вас уже есть права!")
     end
   else
-    component.chat_box.say(nick .. ", вам присвоены права!")
+    say(nick .. ", вам присвоены права!")
     admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
   end
   
