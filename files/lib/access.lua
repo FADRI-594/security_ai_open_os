@@ -6,7 +6,7 @@ local data = require("data")  -- Библиотека данных
 
 
 -- Поиск ника в admins
-function FindNick(nick, admins)
+function access.FindNick(nick, admins)
 
   local st
 
@@ -37,7 +37,7 @@ end
 -- Получение прав администратора
 function access.Get(nick, admins)
 
-  local st =  FindNick(nick, admins)
+  local st =  access.FindNick(nick, admins)
 
 
   if(st == "пусто") then  -- Если таблица в admins нет ников
