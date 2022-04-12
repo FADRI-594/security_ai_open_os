@@ -3,17 +3,18 @@ local cmd = {}
 local access = require("access")  -- Библиотека прав администратора
 
 -- Проверка есть ли имя ИИ в тексте на 1 месте 
-function cmd.CheckNAI(ai_name)
+function cmd.CheckNAI(msg, ai_name)
   local n_in_text = false
-  for k, s in pairs(ai_name) do
+  for i = 1, #ai_name do
 
-    if(string.find(msg, s) == 1) then
+    if(string.find(msg, ai_name[i])) then
       n_in_text = true
       break
     end
-    
+  
   end
 
+  
   return n_in_text
 end
 
@@ -22,7 +23,7 @@ end
 -- Команды
 function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
   
-  local f = cmd.CheckNAI(ai_name)
+  local f = cmd.CheckNAI(msg, ai_name)
   if f then
 
 
