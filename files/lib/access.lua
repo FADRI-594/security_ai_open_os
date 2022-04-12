@@ -13,9 +13,14 @@ function access.FindNick(nick, admins)
 
 
   -- Проверка пустая таблица или нет
-  if(#admins == 1 and admins[1] == "пусто") then
-    empty = true
-    print("Таблица пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
+  if(#admins == 1) then
+    if(admins[1] == "пусто") then
+      empty = true
+      print("Таблица пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
+    else
+      empty = false
+      print("Таблица не пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
+    end
   else
     empty = false
     print("Таблица не пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
