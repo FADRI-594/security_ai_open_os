@@ -18,10 +18,6 @@ term.clear()  -- Очистка экрана
 
 
 local ai_vers, ai_name, auth_users, admins = data.Get()  -- Получение данных из библиотеки даты
-print("Admins:\n")
-for i = 1, #admins do
-  print(admins[i])
-end
 
 component.chat_box.setName(ai_name[1])  -- Установить имя для ИИ на чатбокс
 
