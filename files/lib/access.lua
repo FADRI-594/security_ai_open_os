@@ -5,28 +5,39 @@ local say = component.chat_box.say
 local data = require("data")  -- Библиотека данных
 
 
--- Объединение никнеймов
-function access.NA_in_Line(admins)
-  local NewAdmins = ""  -- Список никнеймов админов
+-- Поиск ника игрока в таблице админов
+function access.FindNick(nick, admins)
+  
+  local found = false -- Ник найден (изначально false)
+  local empty -- Таблица пуста?
 
 
-  if(admins[0] == "пусто") then -- Если admins пуста (в этом случае всегда admins[0] = "пусто")
-    NewAdmins = "пусто"
+  -- Проверка пустая таблица или нет
+  if(#admins == 1 and admins[1] == "пусто") then
+    empty = true
   else
+    empty = false
+  end
 
-    -- Перебор списка админов
+
+  -- Если таблица не пуста
+  if(empty == false) then
+    
+    -- Поиск ника среди admins
     for i = 1, #admins do
-      if(i == 1) then -- Если это первая запись в admins
-        NewAdmins = admins[i]
-      else
-        NewAdmins = NewAdmins .. "," .. admins[i]
+      if(admins[i] == nick) then  -- Если ник найден в базе
+        
+        found = true  -- Игрок найден!
+  
+        break -- Прекратить поиск игрока
       end
     end
 
   end
 
+  
 
-  return NewAdmins
+  return empty, found
 end
 
 
@@ -34,33 +45,30 @@ end
 
 
 -- Получение прав администратора
-function access.Get(nick, msg, admins)
-
-  local NewAdmins = access.NA_in_Line(admins)
-  print("\nNewAdmins: " .. NewAdmins .. "\n")
+function access.Get(nick, admins)
 
 
-  print("Admins:\n")
-  for i = 1, #admins do
-    print(admins[i])
-  end
+  local empty, found = access.FindNick(nick, admins)
 
 
-
-  
-  if(NewAdmins == "пусто") then -- Если строка ников пуста
+  -- Если таблица пуста
+  if empty then
+    
     say(nick .. ", вам присвоены права!")
     admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
-  else  -- Если есть хотя бы 1 ник
-    
-    if(string.find(NewAdmins, nick) == nil) then  -- Если в admins нет ника игрока
-      say(nick .. ", у вас нет прав на использование этой команды!")
-    else  -- Если в admins есть ник
+
+  -- Если таблица не пуста
+  else
+
+    if found then -- Если ник найден
       say(nick .. ", у вас уже есть права!")
+    else  -- Если ник не найден
+      say(nick .. ", у вас нет прав на использование этой команды!")
     end
 
   end
-  
+
+
 
   return admins
 end
