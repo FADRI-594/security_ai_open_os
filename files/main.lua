@@ -48,5 +48,5 @@ local Cycle = true
 -- Постоянный код
 while Cycle do
   local nick, msg = ReadChat()
-  local ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
+  ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
 end

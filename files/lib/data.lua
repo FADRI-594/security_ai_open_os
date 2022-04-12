@@ -179,7 +179,7 @@ function data.Update(arg, cmd1, cmd2)
     
     data.Set(newArg, command)
 
-    return admins
+    return newArg
 end
 
 
