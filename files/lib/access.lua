@@ -15,8 +15,10 @@ function access.FindNick(nick, admins)
   -- Проверка пустая таблица или нет
   if(#admins == 1 and admins[1] == "пусто") then
     empty = true
+    print("Таблица пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
   else
     empty = false
+    print("Таблица не пуста! = кол-во эл-ов таблицы: " .. #admins .. ", первый элемент: " .. admins[1])
   end
 
 
@@ -28,6 +30,8 @@ function access.FindNick(nick, admins)
       if(admins[i] == nick) then  -- Если ник найден в базе
         
         found = true  -- Игрок найден!
+
+        print("Ник найден в таблице! = место в таблице: " .. i .. ", ник в базе: " .. admins[i])
   
         break -- Прекратить поиск игрока
       end
@@ -35,6 +39,9 @@ function access.FindNick(nick, admins)
 
   end
 
+  if(found == false) then
+    print("Ник не найден в таблице! Ник: " .. nick)
+  end
   
 
   return empty, found
@@ -52,7 +59,7 @@ function access.Get(nick, admins)
 
 
   -- Если таблица пуста
-  if empty then
+  if(empty) then
     
     say(nick .. ", вам присвоены права!")
     admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
