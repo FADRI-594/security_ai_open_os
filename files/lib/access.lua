@@ -11,7 +11,7 @@ function access.NA_in_Line(admins)
 
 
   if(admins[0] == "пусто") then -- Если admins пуста (в этом случае всегда admins[0] = "пусто")
-    NewAdmins = nil
+    NewAdmins = "пусто"
   else
 
     -- Перебор списка админов
@@ -48,7 +48,7 @@ function access.Get(nick, msg, admins)
 
 
   
-  if(NewAdmins == nil) then -- Если строка ников пуста
+  if(NewAdmins == "пусто") then -- Если строка ников пуста
     say(nick .. ", вам присвоены права!")
     admins = data.Update(nick, "admins", "add") -- Вызов функции записи в конфиг
   else  -- Если есть хотя бы 1 ник
