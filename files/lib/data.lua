@@ -92,7 +92,7 @@ function data.Set(arg, cmd)
 
     local newLines = {
         {"Версия ИИ", ai_vers},
-        {"Имя ИИ", ai_name[0]},
+        {"Имя ИИ", ai_name[1]},
         {"Авторизованные пользователи", auth_users},
         {"Администраторы", admins}
     }
