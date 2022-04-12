@@ -9,7 +9,7 @@ local data = require("data")  -- Библиотека данных
 function access.FindNick(nick, admins)
   
   local found = false -- Ник найден (изначально false)
-  local empty -- Таблица пуста?
+  local empty = true -- Таблица пуста
 
 
   -- Проверка пустая таблица или нет
