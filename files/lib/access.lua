@@ -2,7 +2,7 @@ local access = {}
 local say = require("component").chat_box.say
 -- Библиотеки
 local data = require("data")  -- Библиотека данных
-local detect = require("detect") -- Библиотека проверки ников
+local detect = require("detect") -- Библиотека поиска поблизости
 
 
 -- Функции
@@ -86,7 +86,7 @@ function access.Auth(nick, auth_users, admins, arg)
         say(nick .. ", вы успешно авторизованы!")
       else  -- Если есть цель авторизации
         local detected = detect.Player(arg) -- Проверка рядом ли игрок
-        if detect then  -- Если цель рядом
+        if detected then  -- Если цель рядом
           auth_users = data.Update(arg, "auth_users", "add") -- Вызов функции записи в конфиг цели (авторизация цели)
           say(nick .. ", вы успешно авторизовали " .. arg .. "!")
         else
@@ -120,7 +120,7 @@ function access.Deauth(nick, auth_users, admins, arg)
       say(nick .. ", вы успешно удалили права администратора " .. arg .. "!")
     end
     
-    
+
   else
     say(nick .. ", у вас нет прав на использование этой команды!")
   end
