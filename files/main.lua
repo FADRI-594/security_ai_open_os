@@ -14,6 +14,9 @@ local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
 
 
+
+
+
 term.clear()  -- Очистка экрана
 
 
@@ -32,20 +35,45 @@ say("Приветствую!")
 
 
 
+
 -- Функции
+-- Функция lower
+function string.lower ( str ) return str:gsub ( "([A-ZА-ЯЁ])", function ( c ) return string.char ( string.byte ( c ) + ( c == 'ё' and 16 or 32 ) ) end ) end
+
+
+-- Функция разбиения сообщений
+function SplitMessage(msg)
+  local new_msg = {}
+
+  local i = 1
+  for s in string.gmatch(msg, "[^ ]+") do
+    new_msg[i] = s
+  end
+
+  return new_msg
+end
+
+
 -- Функция чтения чата
 function ReadChat()
   local _, add, nick, msg = event.pull("chat_message")
 
-  return nick, msg
+  msg = string.lower(msg)
+
+  local new_msg = SplitMessage(msg)
+
+  return nick, new_msg
 end
 -- Конец функций
 
 
-local Cycle = true
+
+
+
+
 
 -- Постоянный код
-while Cycle do
+while true do
   local nick, msg = ReadChat()
   ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
 end

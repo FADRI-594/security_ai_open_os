@@ -77,7 +77,7 @@ function data.Set(arg, cmd)
     local ai_vers, ai_name, auth_users, admins = data.Get()
 
 
-    -- Проверка что перезаписать
+    -- Проверка что перезаписать | перезапись
     if(cmd == "ai_vers") then
         ai_vers = arg
     elseif(cmd == "ai_name") then
@@ -141,8 +141,43 @@ function data.Update(arg, cmd1, cmd2)
     local command
 
 
-    if(cmd1 == "admins") then   -- Если изменения администраторов
-        if(cmd2 == "add") then  -- Если добавление администратора
+    -- Изменение авторизованных пользователей
+    if(cmd1 == "auth_users") then
+        if(cmd2 == "add") then  -- Если добавление
+
+            if(#auth_users == 1 and auth_users[#auth_users] == "пусто") then  -- Если всего 1 запись и она пуста
+                auth_users[#auth_users] = arg
+            else
+                auth_users[#auth_users+1] = arg
+            end
+
+        elseif(cmd2 == "delete") then   -- Если удаление
+
+            for i = 1, #auth_users do
+                if(auth_users[i] == arg) then   -- Если авторизованный пользователь = нику
+                    if(i == #auth_users) then   -- Если авторизованный пользователь в самом конце
+                        if(#auth_users > 1) then
+                            auth_users[i] = nil
+                        else
+                            auth_users[i] = "пусто" 
+                        end
+                    else
+                        for l = 1, #auth_users do
+                            if(l >= i) then
+                                auth_users[l] = auth_users[l+1]
+                            end
+                        end
+                    end
+                end 
+            end
+
+        end
+
+        newArg = auth_users
+        command = "auth_users"
+    -- Изменение администраторов
+    elseif(cmd1 == "admins") then
+        if(cmd2 == "add") then  -- Если добавление
 
             if(#admins == 1 and admins[#admins] == "пусто") then  -- Если всего 1 запись и она пуста
                 admins[#admins] = arg
@@ -150,7 +185,7 @@ function data.Update(arg, cmd1, cmd2)
                 admins[#admins+1] = arg
             end
 
-        elseif(cmd2 == "delete") then   -- Если удаление администратора
+        elseif(cmd2 == "delete") then   -- Если удаление
 
             for i = 1, #admins do
                 if(admins[i] == arg) then   -- Если админ = нику
