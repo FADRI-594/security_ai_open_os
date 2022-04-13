@@ -36,9 +36,9 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
       elseif(msg[1] == "deauth") then -- Деавторизация игрока
 
         if(msg[2] == nil and #msg == 1) then  -- Если ник игрока не введён
-          auth_users = access.Deauth(nick, auth_users, admins)
+          auth_users, admins = access.Deauth(nick, auth_users, admins)
         elseif(msg[2] ~= nil and #msg == 2) then  -- Если ник игрока введён
-          auth_users = access.Deauth(nick, auth_users, admins, msg[2])
+          auth_users, admins = access.Deauth(nick, auth_users, admins, msg[2])
         else
           say(nick .. ", введна не корректная команда. Список комманд можно узнать командой: help")
         end

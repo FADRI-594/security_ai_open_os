@@ -117,7 +117,7 @@ function access.Deauth(nick, auth_users, admins, arg)
       auth_users = data.Update(nick, "auth_users", "delete") -- Вызов функции удаления игрока (удаление авторизаии игрока)
       say(nick .. ", вы успешно деавторизовали себя!")
     else  -- Если указана цель
-      admins = data.Update(arg, "auth_users", "delete") -- Вызов функции удаления цели (удаление авторизации цели)
+      admins = data.Update(arg, "admins", "delete") -- Вызов функции удаления цели (удаление авторизации цели)
       auth_users = data.Update(arg, "auth_users", "delete") -- Вызов функции удаления цели (удаление авторизации цели)
       say(nick .. ", вы успешно удалили деавторизовали " .. arg .. "!")
     end
@@ -128,7 +128,7 @@ function access.Deauth(nick, auth_users, admins, arg)
   end
 
 
-  return auth_users
+  return auth_users, admins
 end
 
 
