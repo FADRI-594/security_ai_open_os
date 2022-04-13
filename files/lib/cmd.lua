@@ -89,7 +89,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
       end
     -- Ни одна команда не введена правильно
     else
-      say(nick, "введена неверная команда! Список комманд можно узнать командой: help")
+      say(nick .. "введена неверная команда! Список комманд можно узнать командой: help")
     end
 
 
