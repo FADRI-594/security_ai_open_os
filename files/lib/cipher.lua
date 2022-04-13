@@ -35,11 +35,15 @@ end
 function cipher.CheckPassword(code)
     local password = cipher.Encrypt()   -- Получение пароля
     
-    local correct = false
+    local correct = false   -- Изначально пароль не верный
 
-    if(password == code) then
-        correct = true
+    if(password == code) then   -- Если пароль верный
+        correct = true  -- Пароль верный!
     end
 
     return correct
 end
+
+
+
+return cipher
