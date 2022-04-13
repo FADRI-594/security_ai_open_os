@@ -1,8 +1,6 @@
 local component = require("component")
 local term = require("term")
 local event = require("event")
-local unicode = require("unicode")
-local fs = require("filesystem")
 
 local gpu = component.gpu
 
@@ -48,6 +46,7 @@ function SplitMessage(msg)
   local i = 1
   for s in string.gmatch(msg, "[^ ]+") do
     new_msg[i] = s
+    i = i+1
   end
 
   return new_msg
@@ -75,5 +74,10 @@ end
 -- Постоянный код
 while true do
   local nick, msg = ReadChat()
-  ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
+
+
+  if(string.sub(msg[1], 1, 1) == "#") then
+    msg[1] = string.sub(msg[1], 2)
+    ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
+  end
 end
