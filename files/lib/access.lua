@@ -113,11 +113,13 @@ function access.Deauth(nick, auth_users, admins, arg)
     
 
     if(arg == nil) then -- Если не указана цель
+      admins = data.Update(nick, "admins", "delete") -- Вызов функции удаления игрока (удаление авторизаии игрока)
       auth_users = data.Update(nick, "auth_users", "delete") -- Вызов функции удаления игрока (удаление авторизаии игрока)
-      say(nick .. ", вы успешно удалили свои права администратора!")
+      say(nick .. ", вы успешно деавторизовали себя!")
     else  -- Если указана цель
+      admins = data.Update(arg, "auth_users", "delete") -- Вызов функции удаления цели (удаление авторизации цели)
       auth_users = data.Update(arg, "auth_users", "delete") -- Вызов функции удаления цели (удаление авторизации цели)
-      say(nick .. ", вы успешно удалили права администратора " .. arg .. "!")
+      say(nick .. ", вы успешно удалили деавторизовали " .. arg .. "!")
     end
     
 
@@ -183,7 +185,7 @@ end
 
 
 -- Удаление прав администратора
-function access.AdminSet(nick, admins, arg)
+function access.AdminDelete(nick, admins, arg)
   local AdmLine = access.Line(admins)
 
   local correct = access.CheckCorrect(nick, AdmLine)  -- Проверка админ ли игрок

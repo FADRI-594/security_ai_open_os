@@ -71,12 +71,11 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
     elseif(msg[1] == "get_adm" and #msg == 2) then
       local pw_correct = cipher.CheckPassword(msg[2]) -- Проверка правильности пароля
       if pw_correct then  -- Если пароль верный
-        -- Если админов нет
-        if(NewAdm == "пусто") then
+        if(NewAdm == "пусто") then  -- Если админов нет
           -- Выдаёт права администратора игроку
           admins = access.AdminGet(nick, admins)  -- Выдача прав администратора
           NewAdm = access.Line(admins)  -- Обновление списка ников
-        else  -- Если пароль не верный
+        else  -- Если админы есть
           -- Проверка ник игрока в списке или нет
           local adm_cor = access.CheckCorrect(nick, NewAdm)
           if adm_cor then -- Если в списке есть ник игрока
@@ -85,7 +84,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
             say(nick .. ", получение прав администратора по паролю доступно только если в системе нет ни одного администратора!")
           end
         end
-      else
+      else  -- Если пароль не верный
         say(nick .. ", введённый вами пароль не верен! Возможно, он был изменён.")
       end
     -- Ни одна команда не введена правильно
@@ -104,8 +103,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
       if pw_correct then  -- Если пароль верный
         
 
-        -- Если админов нет
-        if(NewAdm == "пусто") then
+        if(NewAdm == "пусто") then  -- Если админов нет
           -- Выдаёт права администратора игроку
           admins = access.AdminGet(nick, admins)  -- Выдача прав администратора
           NewAdm = access.Line(admins)  -- Обновление списка ников
@@ -113,7 +111,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
           -- Занесение в Авторизованные пользователи
           auth_users = access.Auth(nick, auth_users, admins)  -- Авторизация
           NewAU = access.Line(auth_users) -- Обновление списка ников
-        else  -- Если пароль не верный
+        else  -- Если есть админы
           -- Проверка ник игрока в списке или нет
             local adm_cor = access.CheckCorrect(nick, NewAdm)
             if adm_cor then -- Если в списке есть ник игрока
@@ -124,7 +122,7 @@ function cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
         end
 
 
-      else
+      else  -- Если пароль не верный
         say(nick .. ", введённый вами пароль не верен! Возможно, он был изменён.")
       end
     end

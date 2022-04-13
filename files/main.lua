@@ -2,9 +2,8 @@ local component = require("component")
 local term = require("term")
 local event = require("event")
 
+-- Компоненты
 local gpu = component.gpu
-
-
 local say = component.chat_box.say
 
 -- Библиотеки
@@ -12,24 +11,14 @@ local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
 
 
-
-
-
 term.clear()  -- Очистка экрана
+
 
 
 local ai_vers, ai_name, auth_users, admins = data.Get()  -- Получение данных из библиотеки даты
 
 component.chat_box.setName(ai_name[1])  -- Установить имя для ИИ на чатбокс
 
-
---[[
-say("Идёт загрузка системы.")
-os.sleep(10)
-say("Загрузка успешно завершена.")
-os.sleep(1)
-say("Приветствую!")
-]]--
 
 
 
@@ -75,7 +64,7 @@ end
 while true do
   local nick, msg = ReadChat()
 
-
+  -- Проверка если команда (если перед текстом стоит '#')
   if(string.sub(msg[1], 1, 1) == "#") then
     msg[1] = string.sub(msg[1], 2)
     ai_vers, ai_name, auth_users, admins = cmd.Commands(nick, msg, ai_vers, ai_name, auth_users, admins)
