@@ -15,7 +15,7 @@ local applications = {
   { "/home/lib/data.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/data.lua" },  -- Библиотека данных
   { "/home/lib/cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cmd.lua" },  -- Библиотека данных
   { "/home/lib/access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua" },  -- Библиотека данных
-  { "/home/lib/detected.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/detect.lua" },  -- Библиотека данных
+  { "/home/lib/detect.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/detect.lua" },  -- Библиотека данных
   { "/home/lib/cipher.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cipher.lua" }  -- Библиотека данных
 }
 
