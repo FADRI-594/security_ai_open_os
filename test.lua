@@ -29,6 +29,7 @@ local screenHeight = math.floor(height)
 
 -- Выставляем полученное разрешение
 gpu.setResolution(screenWidth, screenHeight)
+-- Конец чужого кода
 
 
 
