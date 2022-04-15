@@ -57,7 +57,7 @@ function Merging(img, mirror, horizontal, vertical)
 
       local newLine = #img + 1
       for nLine = #img, 1 do  -- Проход по всем строкам (снизу вверх)
-        for nColumn = 1, img[nLine] do  -- Проход по всем столбцам
+        for nColumn = 1, #img[nLine] do  -- Проход по всем столбцам
           img[newLine][nColumn] = img[nLine][nColumn]
         end
         newLine = newLine + 1
@@ -68,7 +68,7 @@ function Merging(img, mirror, horizontal, vertical)
       
       for nLine = 1, #img do  -- Проход по всем строкам
         local newColumn = #img[nLine] + 1
-        for nColumn = img[nLine], 1 do  -- Проход по всем столбцам (справа налево)
+        for nColumn = #img[nLine], 1 do  -- Проход по всем столбцам (справа налево)
           img[nLine][newColumn] = img[nLine][nColumn]
           newColumn = newColumn + 1
         end
