@@ -48,6 +48,38 @@ function ClearScreen()
 end
 
 
+-- Объединение рисунка
+function Merging(img, mirror, horizontal, vertical)
+  if(mirror == true) then -- Если нужно отразить
+   
+    if(horizontal == true) then -- Если нужно отразить по горизонтале
+
+      local newLine = #img + 1
+      for nLine = #img, 1 do  -- Проход по всем строкам (снизу вверх)
+        for nColumn = 1, img[nLine] do  -- Проход по всем столбцам
+          img[newLine][nColumn] = img[nLine][nColumn]
+        end
+        newLine = newLine + 1
+      end
+
+    end
+    if(vertical == true) then -- Если нужно отразить по вертикали
+      
+      for nLine = 1, #img do  -- Проход по всем строкам
+        local newColumn = #img[nLine] + 1
+        for nColumn = img[nLine], 1 do  -- Проход по всем столбцам (справа налево)
+          img[nLine][newColumn] = img[nLine][nColumn]
+          newColumn = newColumn + 1
+        end
+      end
+
+    end
+  end
+
+  return img
+end
+
+
 function Color()
   -- Цвета в HEX
   local colorList = {
@@ -68,6 +100,9 @@ end
 function Paint(img, mirror, horizontal, vertical)
   local colorList = Color()
 
+  if(mirror == true) then
+    local img = Merging(img, mirror, horizontal, vertical)
+  end
 
   -- Разрешение экрана
   local screenWidth, screenHeight = gpu.getResolution() -- Получение разрешения экрана
@@ -89,27 +124,6 @@ function Paint(img, mirror, horizontal, vertical)
   -- Строка и стобец чисел делятся на 2 (нанесение с двух сторон от центра и сверху и снизу)
   indent[1], indent[2] = (need_pixels[1]/2), (need_pixels[2]/2)
   
-
-  if(mirror == true) then  -- Если зеркально
-    if(horizontal == true and vertical == true) then  -- Если доступно четверть изображения
-      
-      -- Строка и стобец (нанесение только сверху слева)
-      indent[1], indent[2] = need_pixels[1], need_pixels[2]
-
-    elseif(horizontal == true) then -- Если доступна половина изображения по горизонтале (сверху и снизу)
-
-      -- Столбец чисел делятся на 2 (нанесение сверху и снизу)
-      indent[1], indent[2] = (need_pixels[1]/2), need_pixels[2]
-
-    elseif(vertical == true) then -- Если доступна половина изображения по вертикали (слева и справа)
-      
-      -- Строка чисел делятся на 2 (нанесение слева и справа)
-      indent[1], indent[2] = need_pixels[1], (need_pixels[2]/2)
-
-    end
-  end
-
-
 
 
   -- Координаты
@@ -145,98 +159,9 @@ function Paint(img, mirror, horizontal, vertical)
 
 
 
-  if(mirror == true) then -- Если нужно отзеркалить
-    if(horizontal == true) then -- Если отзеркаливание по горизонтале (сверху и снизу)
-      
-      local point1New = point1
-      point1New[2] = center[2]+1
-
-      -- Рисуем!
-      for nLine = need_pixels[2], 1 do  -- Проход по всем строкам
-        for nColumn = 1, need_pixels[1] do  -- Проход по всем столбцам
-          -- Меняем цвет
-          local nclr = img[nLine][nColumn]  -- Номер цвета из файла изображения
-          local color -- Цвет
-
-          if(nclr == 0) then  -- Если номер цвета в файле 0
-            color = 0xFFFFFF  -- Цвет = белый
-          else
-            color = colorList[nclr] -- Цвет = цвет из таблицы по номеру из файла
-          end
-          gpu.setBackground(color)
 
 
-          -- Рисует:
-          -- от начальной точки X + (текущий столбец - 1) * размер пикселя по X;
-          -- от начальной точки Y + (текущий столбец - 1) * размер пикселя по Y;
-          -- пиксель x; пиксель y; пустота (ничего)
-          gpu.fill(point1[1]+(nColumn-1)*pixelX, point1[2]+(nLine-1)*pixelY,   pixelX, pixelY,   " ")
-        end
-      end
-
-    end
-    if(vertical == true) then -- Если отзеркаливание по вертикале (слева и справа)
-      
-      local point1New = point1
-      point1New[1] = center[1]+1
-
-      -- Рисуем!
-      for nLine = need_pixels[2], 1 do  -- Проход по всем строкам
-        for nColumn = 1, need_pixels[1] do  -- Проход по всем столбцам
-          -- Меняем цвет
-          local nclr = img[nLine][nColumn]  -- Номер цвета из файла изображения
-          local color -- Цвет
-
-          if(nclr == 0) then  -- Если номер цвета в файле 0
-            color = 0xFFFFFF  -- Цвет = белый
-          else
-            color = colorList[nclr] -- Цвет = цвет из таблицы по номеру из файла
-          end
-          gpu.setBackground(color)
-
-
-          -- Рисует:
-          -- от начальной точки X + (текущий столбец - 1) * размер пикселя по X;
-          -- от начальной точки Y + (текущий столбец - 1) * размер пикселя по Y;
-          -- пиксель x; пиксель y; пустота (ничего)
-          gpu.fill(point1[1]+(nColumn-1)*pixelX, point1[2]+(nLine-1)*pixelY,   pixelX, pixelY,   " ")
-        end
-      end
-
-    end
-    if(horizontal == true and vertical == true) then  -- Если отзеркаливание четверти изображения
-      
-      local point1New = point1
-      point1New[1], point1New[2] = center[1]+1, center[2]+1
-
-      -- Рисуем рисунок!
-      for nLine = need_pixels[2], 1 do  -- Проход по всем строкам
-        for nColumn = need_pixels[1], 1 do  -- Проход по всем столбцам
-          -- Меняем цвет
-          local nclr = img[nLine][nColumn]  -- Номер цвета из файла изображения
-          local color -- Цвет
-
-          if(nclr == 0) then  -- Если номер цвета в файле 0
-            color = 0xFFFFFF  -- Цвет = белый
-          else
-            color = colorList[nclr] -- Цвет = цвет из таблицы по номеру из файла
-          end
-          gpu.setBackground(color)
-
-
-          -- Рисует:
-          -- от начальной точки X + (текущий столбец - 1) * размер пикселя по X;
-          -- от начальной точки Y + (текущий столбец - 1) * размер пикселя по Y;
-          -- пиксель x; пиксель y; пустота (ничего)
-          gpu.fill(point1[1]+(nColumn-1)*pixelX, point1[2]+(nLine-1)*pixelY,   pixelX, pixelY,   " ")
-        end
-      end
-
-    end
-  end
-
-
-
+  
 
   gpu.setBackground(0x000000)
   print("\n\nШирина экрана: " .. screenWidth .. "\nВысота экрана: " .. screenHeight .. "\nЦентр экрана: " .. center[1] .. ", " .. center[2])
