@@ -2,7 +2,8 @@ local component = require("component")
 local gpu = component.gpu
 
 -- Библиотеки
-local paint = require("paint")
+local paint = require("paint")  -- Библиотека рисования изображения на экране
+local images = require("images")    -- Библиотека изображения
 
 
 
@@ -56,4 +57,19 @@ end
 
 
 ClearScreen() -- Очистка экрана
-paint.Output(imgEye, mirror, horizontal, vertical)  -- Вызов функции рисования
+
+
+local img = "Eye"
+
+
+local mfs
+for i, s in pairs(images) do
+    if(i == img) then
+        mfs = s
+        break
+    end
+end
+
+if(mfs ~= nil) then -- Если есть изображение
+    paint.Output(mfs.img, mfs.mirror, mfs.horizontal, mfs.vertical) -- Вызов функции рисования
+end
