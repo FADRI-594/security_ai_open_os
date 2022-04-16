@@ -1,54 +1,9 @@
+local paint = {}
 local component = require("component")
 local gpu = component.gpu
 
 
-
-
--- Выставление разрешения экрана в зависимости от экрана
--- Код от ECS - https://computercraft.ru/topic/2501-kak-ubrat-chyornye-polosy-po-krayam-ekrana-v30/
--- Получаем масштаб в качестве первого аргумента скрипта и корректируем его значение
-local scale = tonumber(select(1, ...) or 1)
-if not scale or scale > 1 then
-  scale = 1
-elseif scale < 0.1 then
-  scale = 0.1
-end
-
-local blockCountByWidth, blockCountByHeight = component.proxy(gpu.getScreen()).getAspectRatio()
-local maxWidth, maxHeight = gpu.maxResolution()
-local proportion = (blockCountByWidth * 2 - 0.5) / (blockCountByHeight - 0.25)
-
-local height = scale * math.min(
-  maxWidth / proportion,
-  maxWidth,
-  math.sqrt(maxWidth * maxHeight / proportion)
-)
-
-local screenWidth = math.floor(height * proportion)
-local screenHeight = math.floor(height)
-
--- Выставляем полученное разрешение
-gpu.setResolution(screenWidth, screenHeight)
--- Конец чужого кода
-
-
-
-
-
 -- Функции
--- Очистка экрана
-function ClearScreen()
-  gpu.setBackground(0xFFFFFF)
-  gpu.setForeground(0xFFFFFF)
-
-  local w, h = gpu.getResolution()    -- Получение разрешения экрана
-
-  gpu.fill(1, 1, w, h, " ")
-
-  return
-end
-
-
 -- Объединение рисунка
 function Merging(img, horizontal, vertical)
   local newImage = img
@@ -111,10 +66,11 @@ function Color()
   }
   return colorList
 end
+-- Конец функций
 
 
 -- Функция рисования
-function Paint(img, mirror, horizontal, vertical)
+function paint.Output(img, mirror, horizontal, vertical)
   local colorList = Color() -- Получаем список цветов
 
   if(mirror == true) then -- Если изображение нужно отзеркалить
@@ -173,27 +129,4 @@ end
 
 
 
-
--- Изображения
-local imgEye = {
-  {0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1}, -- 1
-  {0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1}, -- 2
-  {0,0,0,0,0,0,0,1,1,1,1,1,6,6,6,6,6}, -- 3
-  {0,0,0,0,0,0,1,1,1,1,6,6,6,6,6,6,6}, -- 4
-  {0,0,0,0,0,1,1,1,6,6,6,6,6,6,1,1,1}, -- 5
-  {0,0,0,0,1,1,1,6,6,6,6,6,1,1,1,1,1}, -- 6
-  {0,0,0,1,1,1,6,6,6,6,6,1,1,1,1,0,0}, -- 7
-  {0,0,1,1,1,6,6,6,6,6,1,1,1,0,0,0,0}, -- 8
-  {0,1,1,1,6,6,6,6,6,1,1,1,0,0,0,2,2}, -- 9
-  {1,1,1,6,6,6,6,6,1,1,1,0,0,0,2,2,2} -- 10
-}
-
-
-local mirror = true -- Нужно отзеркалить?
-local horizontal = true -- Нужно отзеркалить по горизонтале?
-local vertical = true -- Нужно отзеркалить по вертикали?
-
-
-
-ClearScreen() -- Очистка экрана
-Paint(imgEye, mirror, horizontal, vertical)  -- Вызов функции рисования
+return paint

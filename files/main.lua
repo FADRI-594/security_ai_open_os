@@ -11,6 +11,8 @@ local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
 
 
+
+
 term.clear()  -- Очистка экрана
 
 
