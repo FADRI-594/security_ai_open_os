@@ -32,12 +32,10 @@ function animate.AnimEye()
 
     -- Анимация изображения
     for i = 1, #anim do
-        paint.ClearScreen()
         paint.Output(anim[i].img, anim[i].mirror, anim[i].horizontal, anim[i].vertical) -- Вызов функции рисования
     end
     os.sleep(0.5)
     for i = #anim, 1, -1 do
-        paint.ClearScreen()
         paint.Output(anim[i].img, anim[i].mirror, anim[i].horizontal, anim[i].vertical) -- Вызов функции рисования
     end
     os.sleep(0.5)
