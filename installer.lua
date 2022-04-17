@@ -13,16 +13,16 @@ local applications = {
   { "/home/config.txt", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/config.txt" },  -- Конфиг файл
   { "/home/uninstall.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/uninstall.lua" },  -- Файл удаления
   -- Основые библиотеки
-  { "/home/lib/core/data.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/data.lua" },  -- Библиотека данных
-  { "/home/lib/core/cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cmd.lua" },  -- Библиотека данных
-  { "/home/lib/core/access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua" },  -- Библиотека данных
-  { "/home/lib/core/detect.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/detect.lua" },  -- Библиотека данных
-  { "/home/lib/core/cipher.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cipher.lua" },  -- Библиотека данных
+  { "/home/lib/core/data.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/core/data.lua" },  -- Библиотека данных
+  { "/home/lib/core/cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/core/cmd.lua" },  -- Библиотека данных
+  { "/home/lib/core/access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/core/access.lua" },  -- Библиотека данных
+  { "/home/lib/core/detect.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/core/detect.lua" },  -- Библиотека данных
+  { "/home/lib/core/cipher.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/core/cipher.lua" },  -- Библиотека данных
   -- Библиотеки вывода
-  { "/home/lib/displaying/images.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/displaying/images.lua" },  -- Библиотека изображений
-  { "/home/lib/displaying/paint.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/displaying/paint.lua" },  -- Библиотека рисования на экране
-  { "/home/lib/displaying/animate.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/displaying/animate.lua" },  -- Библиотека анимации
-  { "/home/lib/displaying/output.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/displaying/output.lua" }  -- Библиотека вывода на экран
+  { "/home/lib/displaying/images.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/displaying/images.lua" },  -- Библиотека изображений
+  { "/home/lib/displaying/paint.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/displaying/paint.lua" },  -- Библиотека рисования на экране
+  { "/home/lib/displaying/animate.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/displaying/animate.lua" },  -- Библиотека анимации
+  { "/home/lib/displaying/output.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/displaying/output.lua" }  -- Библиотека вывода на экран
 }
 
 -- Загрузка файлов
