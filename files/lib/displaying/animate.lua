@@ -11,12 +11,12 @@ function animate.AnimEye()
     local Eye = images.Eye  -- Исходное изображение
 
     -- Изображения для анимации
-    local AnimEye1
-    local AnimEye2
-    local AnimEye3
-    local AnimEye4
-    local AnimEye5
-    local AnimEye6
+    local AnimEye1 = images.AnimEye1
+    local AnimEye2 = images.AnimEye2
+    local AnimEye3 = images.AnimEye3
+    local AnimEye4 = images.AnimEye4
+    local AnimEye5 = images.AnimEye5
+    local AnimEye6 = images.AnimEye6
 
 
 

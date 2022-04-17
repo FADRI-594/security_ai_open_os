@@ -1,4 +1,5 @@
 local component = require("component")
+local event = require("event")
 local gpu = component.gpu
 
 -- Библиотеки
@@ -71,6 +72,7 @@ for i, s in pairs(images) do    -- Перебор списка всех изоб
   end
 end
 
+
 if(mfs ~= nil) then -- Если есть изображение
   paint.Output(mfs.img, mfs.mirror, mfs.horizontal, mfs.vertical) -- Вызов функции рисования
 end
@@ -78,5 +80,5 @@ end
 
 
 while true do
-  animate.AnimEye()
+  event.timer(10, animate.AnimEye())
 end
