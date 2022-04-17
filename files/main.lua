@@ -1,6 +1,7 @@
 local component = require("component")
 local term = require("term")
 local event = require("event")
+local thread = require("thread")
 
 -- Компоненты
 local gpu = component.gpu
@@ -9,11 +10,19 @@ local say = component.chat_box.say
 -- Библиотеки
 local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
+local output = require("output")  -- Библиотека вывода
 
+
+-- Инициализируем многозадачность
+thread.init()
 
 
 
 term.clear()  -- Очистка экрана
+
+
+
+thread.create(output) -- Создание потока вывода изображений
 
 
 

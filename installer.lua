@@ -9,6 +9,7 @@ term.clear()
 local applications = {
   -- Основные файлы
   { "/home/main.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/main.lua" },  -- Исполняющий файл
+  { "/home/thread.lua", "" },  -- Ядра
   { "/home/config.txt", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/config.txt" },  -- Конфиг файл
   { "/home/uninstall.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/uninstall.lua" },  -- Файл удаления
   -- Основые библиотеки
@@ -16,7 +17,12 @@ local applications = {
   { "/home/lib/cmd.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cmd.lua" },  -- Библиотека данных
   { "/home/lib/access.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/access.lua" },  -- Библиотека данных
   { "/home/lib/detect.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/detect.lua" },  -- Библиотека данных
-  { "/home/lib/cipher.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cipher.lua" }  -- Библиотека данных
+  { "/home/lib/cipher.lua", "https://raw.githubusercontent.com/FADRI-594/security_ai_open_os/security_ai_v.1.0/files/lib/cipher.lua" },  -- Библиотека данных
+  -- Библиотеки вывода
+  { "/home/displaying/images.lua", "" },  -- Библиотека изображений
+  { "/home/displaying/paints.lua", "" },  -- Библиотека рисования на экране
+  { "/home/displaying/animate.lua", "" },  -- Библиотека анимации
+  { "/home/displaying/output.lua", "" }  -- Библиотека вывода на экран
 }
 
 -- Загрузка файлов

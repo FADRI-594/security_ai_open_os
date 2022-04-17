@@ -5,7 +5,7 @@ local gpu = component.gpu
 
 -- Функции
 -- Объединение рисунка
-function Merging(img, horizontal, vertical)
+function paint.Merging(img, horizontal, vertical)
   local newImage = img
   if(horizontal == true) then
 
@@ -53,28 +53,101 @@ end
 
 
 -- Цвета в HEX
-function Color()
-  local colorList = {
-    0x000000, -- 1. Black
-    0xFF0000, -- 2. Red
-    0x00FF00, -- 3. Green
-    0x0000FF, -- 4. Blue
-    0xFFFF00, -- 5. Yellow
-    0x00FFFF, -- 6. Bright blue
-    0xFF00FF, -- 7. Pink
-    0xC0C0C0  -- 8. Grey
-  }
+function paint.Colors()
+  local colorList = {}
+
+  -- Черный цвет
+  colorList.Black = {}
+  colorList.Black.number = 1
+  colorList.Black.normal = 0x000000
+  colorList.Black.light = 0x303030
+  colorList.Black.dark = 0x000000
+
+  -- Красный цвет
+  colorList.Red = {}
+  colorList.Red.number = 2
+  colorList.Red.normal = 0xFF0000
+  colorList.Red.light = 0xFF3030
+  colorList.Red.dark = 0xBB0000
+
+  -- Зеленый цвет
+  colorList.Green = {}
+  colorList.Green.number = 3
+  colorList.Green.normal = 0x00FF00
+  colorList.Green.light = 0x30FF30
+  colorList.Green.dark = 0x00BB00
+
+  -- Синий цвет
+  colorList.Blue = {}
+  colorList.Blue.number = 4
+  colorList.Blue.normal = 0x0000FF
+  colorList.Blue.light = 0x3030FF
+  colorList.Blue.dark = 0x0000BB
+
+  -- Желтый
+  colorList.Yellow = {}
+  colorList.Yellow.number = 5
+  colorList.Yellow.normal = 0xFFFF00
+  colorList.Yellow.light = 0xFFFFAA
+  colorList.Yellow.dark = 0xD0D01E
+
+  -- Аквамарин
+  colorList.Aquamarine = {}
+  colorList.Aquamarine.number = 6
+  colorList.Aquamarine.normal = 0x00FFFF
+  colorList.Aquamarine.light = 0xAAFFFF
+  colorList.Aquamarine.dark = 0x1ED0D0
+
+  -- Розовый
+  colorList.Pink = {}
+  colorList.Pink.number = 7
+  colorList.Pink.normal = 0xFF00FF
+  colorList.Pink.light = 0xFFAAFF
+  colorList.Pink.dark = 0xD01ED0
+
+  -- Серый
+  colorList.Grey = {}
+  colorList.Grey.number = 8
+  colorList.Grey.normal = 0xC0C0C0
+  colorList.Grey.light = 0xA0A0A0
+  colorList.Grey.dark = 0xD0D0D0
+
+
   return colorList
 end
--- Конец функций
+
+-- Имена цветов
+function paint.ColorsName(numOne)
+  local clrName
+  if(numOne == 1) then
+      clrName = "Black"
+  elseif(numOne == 2) then
+      clrName = "Red"
+  elseif(numOne == 3) then
+      clrName = "Green"
+  elseif(numOne == 4) then
+      clrName = "Blue"
+  elseif(numOne == 5) then
+      clrName = "Yellow"
+  elseif(numOne == 6) then
+      clrName = "Aquamarine"
+  elseif(numOne == 7) then
+      clrName = "Pink"
+  elseif(numOne == 8) then
+      clrName = "Grey"
+  end
+  
+  return clrName
+end
+
 
 
 -- Функция рисования
 function paint.Output(img, mirror, horizontal, vertical)
-  local colorList = Color() -- Получаем список цветов
+  local colorList = paint.Colors() -- Получаем список цветов
 
   if(mirror == true) then -- Если изображение нужно отзеркалить
-    local img = Merging(img, horizontal, vertical)  -- Получаем отзеркаленное изображение
+    local img = paint.Merging(img, horizontal, vertical)  -- Получаем отзеркаленное изображение
   end
   -- Разрешение экрана
   local screenWidth, screenHeight = gpu.getResolution() -- Получение разрешения экрана
@@ -110,7 +183,39 @@ function paint.Output(img, mirror, horizontal, vertical)
       if(nclr == 0) then  -- Если номер цвета в файле 0
         color = 0xFFFFFF  -- Цвет = белый
       else
-        color = colorList[nclr] -- Цвет = цвет из таблицы по номеру из файла
+
+
+        local tbl = {}
+        local i = 1
+        nclr = tostring(nclr)
+        for v in string.gmatch(nclr, "%d") do
+            tbl[i] = tonumber(v)
+            i = i+1
+        end
+
+        local clrName = paint.ColorsName(tbl[1])
+
+        local tl
+        for i, s in pairs(colorList) do
+            if(i == clrName) then
+                tl = s
+                break
+            end
+        end
+
+        if(#tbl == 1) then
+            color = tl.normal
+        elseif(#tbl == 2) then
+
+            if(tbl[2] == 0) then
+                color = tl.light
+            elseif(tbl[2] == 1) then
+                color = tl.dark
+            end
+
+        end
+
+        
       end
       gpu.setBackground(color)
 

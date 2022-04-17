@@ -4,6 +4,7 @@ local gpu = component.gpu
 -- Библиотеки
 local paint = require("paint")  -- Библиотека рисования изображения на экране
 local images = require("images")    -- Библиотека изображения
+local animate = require("animate")  -- Библиотека анимаций
 
 
 
@@ -63,8 +64,8 @@ local img = "Eye"
 
 
 local mfs
-for i, s in pairs(images) do
-    if(i == img) then
+for i, s in pairs(images) do    -- Перебор списка всех изображений
+    if(i == img) then   -- Если имя изображения равно заданному изображению
         mfs = s
         break
     end
@@ -72,4 +73,10 @@ end
 
 if(mfs ~= nil) then -- Если есть изображение
     paint.Output(mfs.img, mfs.mirror, mfs.horizontal, mfs.vertical) -- Вызов функции рисования
+end
+
+
+
+while true do
+    animate.AnimEye()
 end
