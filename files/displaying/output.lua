@@ -1,3 +1,4 @@
+local output = {}
 local component = require("component")
 local gpu = component.gpu
 
@@ -8,46 +9,19 @@ local animate = require("animate")  -- Библиотека анимаций
 
 
 
--- Выставление разрешения экрана в зависимости от экрана
--- Код от ECS - https://computercraft.ru/topic/2501-kak-ubrat-chyornye-polosy-po-krayam-ekrana-v30/
--- Получаем масштаб в качестве первого аргумента скрипта и корректируем его значение
-local scale = tonumber(select(1, ...) or 1)
-if not scale or scale > 1 then
-  scale = 1
-elseif scale < 0.1 then
-  scale = 0.1
-end
-
-local blockCountByWidth, blockCountByHeight = component.proxy(gpu.getScreen()).getAspectRatio()
-local maxWidth, maxHeight = gpu.maxResolution()
-local proportion = (blockCountByWidth * 2 - 0.5) / (blockCountByHeight - 0.25)
-
-local height = scale * math.min(
-  maxWidth / proportion,
-  maxWidth,
-  math.sqrt(maxWidth * maxHeight / proportion)
-)
-
-local screenWidth = math.floor(height * proportion)
-local screenHeight = math.floor(height)
-
--- Выставляем полученное разрешение
-gpu.setResolution(screenWidth, screenHeight)
--- Конец чужого кода
-
 
 
 -- Функции
 -- Очистка экрана
-function ClearScreen()
-    gpu.setBackground(0xFFFFFF)
-    gpu.setForeground(0xFFFFFF)
+function output.ClearScreen()
+  gpu.setBackground(0xFFFFFF)
+  gpu.setForeground(0xFFFFFF)
 
-    local w, h = gpu.getResolution()    -- Получение разрешения экрана
+  local w, h = gpu.getResolution()    -- Получение разрешения экрана
 
-    gpu.fill(1, 1, w, h, " ")
+  gpu.fill(1, 1, w, h, " ")
 
-    return
+  return
 end
 -- Конец функций
 
@@ -57,26 +31,60 @@ end
 
 
 
-ClearScreen() -- Очистка экрана
+function output.Out()
+  -- Выставление разрешения экрана в зависимости от экрана
+  -- Код от ECS - https://computercraft.ru/topic/2501-kak-ubrat-chyornye-polosy-po-krayam-ekrana-v30/
+  -- Получаем масштаб в качестве первого аргумента скрипта и корректируем его значение
+  local scale = tonumber(select(1, ...) or 1)
+  if not scale or scale > 1 then
+    scale = 1
+  elseif scale < 0.1 then
+    scale = 0.1
+  end
+
+  local blockCountByWidth, blockCountByHeight = component.proxy(gpu.getScreen()).getAspectRatio()
+  local maxWidth, maxHeight = gpu.maxResolution()
+  local proportion = (blockCountByWidth * 2 - 0.5) / (blockCountByHeight - 0.25)
+
+  local height = scale * math.min(
+    maxWidth / proportion,
+    maxWidth,
+    math.sqrt(maxWidth * maxHeight / proportion)
+  )
+
+  local screenWidth = math.floor(height * proportion)
+  local screenHeight = math.floor(height)
+
+  -- Выставляем полученное разрешение
+  gpu.setResolution(screenWidth, screenHeight)
+  -- Конец чужого кода
 
 
-local img = "Eye"
 
 
-local mfs
-for i, s in pairs(images) do    -- Перебор списка всех изображений
+
+
+  output.ClearScreen() -- Очистка экрана
+
+
+  local img = "Eye"
+
+
+  local mfs
+  for i, s in pairs(images) do    -- Перебор списка всех изображений
     if(i == img) then   -- Если имя изображения равно заданному изображению
         mfs = s
         break
     end
-end
+  end
 
-if(mfs ~= nil) then -- Если есть изображение
+  if(mfs ~= nil) then -- Если есть изображение
     paint.Output(mfs.img, mfs.mirror, mfs.horizontal, mfs.vertical) -- Вызов функции рисования
-end
+  end
 
 
 
-while true do
+  while true do
     animate.AnimEye()
+  end
 end
