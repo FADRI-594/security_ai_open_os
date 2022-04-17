@@ -63,4 +63,4 @@ end
 
 
 
-event.timer(15, animate.AnimEye(), math.huge)  -- Анимация глаза
+event.timer(15, animate.AnimEye, math.huge)  -- Анимация глаза
