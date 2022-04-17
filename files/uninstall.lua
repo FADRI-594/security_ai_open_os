@@ -9,7 +9,7 @@ term.clear()
 local applications = {
     -- Библиотеки
     "/home/lib",  -- Основная библиотека
-    "/home/displaying", -- Библиотека вывода на экран
+    --"/home/displaying", -- Библиотека вывода на экран
     -- Основные файлы
     "/home/main.lua",  -- Исполняющий файл
     "/home/thread.lua", -- Ядра

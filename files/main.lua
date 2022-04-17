@@ -22,7 +22,7 @@ term.clear()  -- Очистка экрана
 
 
 
-thread.create(output.Out()) -- Создание потока вывода изображений
+thread.create(output) -- Создание потока вывода изображений
 
 
 
