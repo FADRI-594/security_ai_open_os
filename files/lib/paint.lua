@@ -4,6 +4,19 @@ local gpu = component.gpu
 
 
 -- Функции
+-- Очистка экрана
+function paint.ClearScreen()
+  gpu.setBackground(0xFFFFFF)
+  gpu.setForeground(0xFFFFFF)
+
+  local w, h = gpu.getResolution()    -- Получение разрешения экрана
+
+  gpu.fill(1, 1, w, h, " ")
+
+  return
+end
+
+
 -- Объединение рисунка
 function paint.Merging(img, horizontal, vertical)
   local newImage = img

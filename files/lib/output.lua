@@ -38,27 +38,12 @@ gpu.setResolution(screenWidth, screenHeight)
 
 
 
--- Функции
--- Очистка экрана
-function ClearScreen()
-  gpu.setBackground(0xFFFFFF)
-  gpu.setForeground(0xFFFFFF)
-
-  local w, h = gpu.getResolution()    -- Получение разрешения экрана
-
-  gpu.fill(1, 1, w, h, " ")
-
-  return
-end
--- Конец функций
 
 
 
 
 
-
-
-ClearScreen() -- Очистка экрана
+paint.ClearScreen() -- Очистка экрана
 
 
 local img = "Eye"
@@ -80,5 +65,5 @@ end
 
 
 while true do
-  event.timer(10, animate.AnimEye())
+  event.timer(10, animate.AnimEye())  -- Анимация глаза
 end
