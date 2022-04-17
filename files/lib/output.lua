@@ -64,6 +64,4 @@ end
 
 
 
-while true do
-  event.timer(10, animate.AnimEye())  -- Анимация глаза
-end
+event.timer(10, animate.AnimEye(), math.huge)  -- Анимация глаза
