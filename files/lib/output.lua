@@ -1,12 +1,16 @@
 local component = require("component")
 local event = require("event")
 local gpu = component.gpu
+local thread = require("thread")
 
 -- Библиотеки
 local paint = require("paint")  -- Библиотека рисования изображения на экране
 local images = require("images")    -- Библиотека изображения
 local animate = require("animate")  -- Библиотека анимаций
 
+
+-- Инициализируем многозадачность
+thread.init()
 
 
 -- Выставление разрешения экрана в зависимости от экрана
@@ -39,11 +43,6 @@ gpu.setResolution(screenWidth, screenHeight)
 
 
 
-function Anim()
-  animate.AnimEye()
-end
-
-
 
 
 
@@ -68,4 +67,4 @@ end
 
 
 
-event.timer(15, Anim(), math.huge)  -- Анимация глаза
+event.timer(15, thread.create(animate.AnimEye()), math.huge)  -- Анимация глаза
