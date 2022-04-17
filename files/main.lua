@@ -10,6 +10,7 @@ local say = component.chat_box.say
 -- Библиотеки
 local data = require("data")  -- Библиотека данных
 local cmd = require("cmd")  -- Библиотека команд
+local displaying = require("displaying")  -- Библиотека
 local output = require("output")  -- Библиотека вывода
 
 
