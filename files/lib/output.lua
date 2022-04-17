@@ -39,6 +39,10 @@ gpu.setResolution(screenWidth, screenHeight)
 
 
 
+function Anim()
+  animate.AnimEye()
+end
+
 
 
 
@@ -64,4 +68,4 @@ end
 
 
 
-event.timer(10, animate.AnimEye(), math.huge)  -- Анимация глаза
+event.timer(15, Anim(), math.huge)  -- Анимация глаза
